@@ -1,0 +1,17 @@
+{
+  "version": "2.13.0",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "packages": ["packages/*", "packages/phoenix-ng/projects/*"],
+  "command": {
+    "publish": {
+      "ignoreChanges": ["*.md", "*.txt", "*.obj"],
+      "message": "chore(release): %s",
+      "conventionalCommits": true,
+      "changelogPreset": "angular"
+    },
+    "run": {
+      "parallel": true
+    }
+  }
+}

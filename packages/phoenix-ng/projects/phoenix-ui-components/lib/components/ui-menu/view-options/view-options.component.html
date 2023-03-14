@@ -1,0 +1,49 @@
+<mat-menu #viewOptions>
+  <button
+    mat-menu-item
+    (click)="
+      $event.stopPropagation();
+      showCartesianGridCheckbox._inputElement.nativeElement.click()
+    "
+  >
+    <mat-checkbox
+      #showCartesianGridCheckbox
+      (click)="$event.stopPropagation()"
+      (change)="setCartesianGrid($event)"
+      >Show Cartesian Grid
+    </mat-checkbox>
+  </button>
+  <button
+    mat-menu-item
+    *ngFor="let view of views"
+    (click)="displayView($event, view)"
+  >
+    <svg class="view-icon" *ngIf="view.icon">
+      <use attr.href="assets/icons/{{ view.icon }}.svg#{{ view.icon }}"></use>
+    </svg>
+    {{ view.name }}
+  </button>
+</mat-menu>
+
+<app-menu-toggle
+  [matMenuTriggerFor]="viewOptions"
+  tooltip="View options"
+  icon="views"
+  [active]="false"
+>
+</app-menu-toggle>
+
+<div *ngIf="cartesianGridVisible" class="cartesian-grid">
+  <div class="x-axis">
+    <div class="label">x</div>
+    <div *ngFor="let coord of xCoords" class="tick">{{coord}}</div>
+  </div>
+  <div class="y-axis">
+    <div class="label">y</div>
+    <div *ngFor="let coord of yCoords" class="tick">{{coord}}</div>
+  </div>
+  <div class="z-axis">
+    <div class="label">z</div>
+    <div *ngFor="let coord of zCoords" class="tick">{{coord}}</div>
+  </div>
+</div>
